@@ -75,6 +75,7 @@ resource "azurerm_storage_account" "techssa" {
   location                 = azurerm_resource_group.techielassrg.location
   account_tier             ="standard"
   account_replication_type = "LRS"
+  public_network_access_enabled = true
   
 }
  
