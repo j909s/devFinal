@@ -79,12 +79,14 @@ resource "azurerm_subnet" "techielasssubnet" {
 
 resource "azurerm_storage_container" "techielasscontainer" {
   name                  = local.storage_name
+  resource_group_name  = azurerm_resource_group.techielassrg.name
   storage_account_name  = azurerm_storage_account.techielassrg.name
   container_access_type = "blob"
 }
 
 resource "azurem_storage_blob" "techielassblobs"{
   name                   = trim(each.key, "phpApp/")
+  resource_group_name  = azurerm_resource_group.techielassrg.name
   storage_account_name   = azurerm_storage_account.techielassrg.name
   storage_container_name = azurerm_storage_container.techielasscontainer.name
   type                   = "Block"
