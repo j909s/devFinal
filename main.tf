@@ -91,7 +91,6 @@ resource "azurerm_storage_container" "techielasscontainer" {
 
 resource "azurerm_storage_blob" "techossblobs" {
   for_each = fileset(path.module, "phpApp/*")
-  public_network_access_enabled = true
   name                   = trim(each.key, "phpApp/")
   storage_account_name   = azurerm_storage_account.techssa.name
   storage_container_name = azurerm_storage_container.techielasscontainer.name
