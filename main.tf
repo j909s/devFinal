@@ -78,7 +78,7 @@ resource "azurerm_subnet" "techielasssubnet" {
 }
 
 resource "azurerm_storage_container" "techielasscontainer" {
-  name                  = "phpApp"
+  name                  = local.storage_name
   storage_account_name  = azurerm_storage_account.techielassrg.name
   container_access_type = "blob"
 }
