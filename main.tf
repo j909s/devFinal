@@ -73,6 +73,8 @@ resource "azurerm_storage_account" "techssa" {
   name                     = local.storage_name
   resource_group_name      = azurerm_resource_group.techielassrg.name
   location                 = azurerm_resource_group.techielassrg.location
+  account_tier             ="standard"
+  account_replication_type = "LRS"
   tags = {
     environment = var.tag_environment
     owner       = var.tag_owner
