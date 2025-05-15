@@ -81,7 +81,6 @@ resource "azurerm_storage_account" "techssa" {
 
 resource "azurerm_storage_container" "techielasscontainer" {
   name                  = local.storage_name
-  resource_group_name  = azurerm_resource_group.techielassrg.name
   storage_account_name  = azurerm_storage_account.techssa.name
   container_access_type = "blob"
   
@@ -92,7 +91,6 @@ resource "azurerm_storage_blob" "techossblobs" {
   for_each = fileset(path.module, "phpApp/*")
  
   name                   = trim(each.key, "phpApp/")
-  resource_group_name  = azurerm_resource_group.techielassrg.name
   storage_account_name   = azurerm_storage_account.techssa.name
   storage_container_name = azurerm_storage_container.techielasscontainer.name
   type                   = "Block"
