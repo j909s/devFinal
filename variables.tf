@@ -9,7 +9,7 @@ variable "location" {
 
 variable "naming_prefix" {
   type    = string
-  default = "techielassgha"
+  default = "terraform"
 }
 
 variable "tag_environment" {
