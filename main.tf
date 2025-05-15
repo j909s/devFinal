@@ -83,7 +83,7 @@ resource "azurerm_storage_account" "techssa" {
 resource "azurerm_storage_container" "techielasscontainer" {
   name                  = "appcontainer"
   storage_account_name  = azurerm_storage_account.techssa.name
-  container_access_type = "blob"
+  container_access_type = "private"
   
   
 }
