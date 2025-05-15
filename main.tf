@@ -7,6 +7,7 @@ locals {
   ddos_plan_name      = "${var.naming_prefix}-${random_integer.name_suffix.result}"
   vnet_name           = "${var.naming_prefix}-${random_integer.name_suffix.result}"
   subnet_name         = "${var.naming_prefix}-${random_integer.name_suffix.result}"
+  storage_name        = "${var.naming_prefix}-${random_integer.name_suffix.result}"
 }
 
 resource "random_integer" "name_suffix" {
@@ -28,11 +29,13 @@ resource "azurerm_resource_group" "techielassrg" {
 }
 
 resource "azurerm_storage_account" "techssa" {
-  name                     = "phpApp"
+  name                     = local.storage_name
   resource_group_name      = azurerm_resource_group.ttechielassrg.name
   location                 = azurerm_resource_group.techielassrg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+  tags = {
+    environment = var.tag_environment
+    owner       = var.tag_owner
+  }
 }
  
 
@@ -81,7 +84,7 @@ resource "azurerm_storage_container" "techielasscontainer" {
 }
 
 resource "azurem_storage_blob" "techielassblobs"{
-  name                   = trim(each.key, "file_uploads/")
+  name                   = trim(each.key, "phpApp/")
   storage_account_name   = azurerm_storage_account.techielassrg.name
   storage_container_name = azurerm_storage_container.techielasscontainer.name
   type                   = "Block"
