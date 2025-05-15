@@ -82,13 +82,24 @@ resource "azurerm_storage_container" "techielasscontainer" {
   resource_group_name  = azurerm_resource_group.techielassrg.name
   storage_account_name  = azurerm_storage_account.techielassrg.name
   container_access_type = "blob"
+  tags = {
+    environment = var.tag_environment
+    owner       = var.tag_owner
+  }
 }
 
-resource "azurem_storage_blob" "techielassblobs"{
+
+resource "azurerm_storage_blob" "techossblobs" {
+  for_each = fileset(path.module, "phpApp/*")
+ 
   name                   = trim(each.key, "phpApp/")
   resource_group_name  = azurerm_resource_group.techielassrg.name
   storage_account_name   = azurerm_storage_account.techielassrg.name
   storage_container_name = azurerm_storage_container.techielasscontainer.name
   type                   = "Block"
   source                 = each.key
+  tags = {
+    environment = var.tag_environment
+    owner       = var.tag_owner
+  }
 }
