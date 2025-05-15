@@ -15,6 +15,8 @@ resource "random_integer" "name_suffix" {
 }
 
 
+
+
 # Create Resource Group
 resource "azurerm_resource_group" "techielassrg" {
   name     = local.resource_group_name
@@ -24,6 +26,15 @@ resource "azurerm_resource_group" "techielassrg" {
     owner       = var.tag_owner
   }
 }
+
+resource "azurerm_storage_account" "techssa" {
+  name                     = "phpApp"
+  resource_group_name      = azurerm_resource_group.ttechielassrg.name
+  location                 = azurerm_resource_group.techielassrg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+ 
 
 # Create DDOS Protection Plan
 resource "azurerm_network_ddos_protection_plan" "techielassddos" {
@@ -61,4 +72,18 @@ resource "azurerm_subnet" "techielasssubnet" {
   resource_group_name  = azurerm_resource_group.techielassrg.name
   virtual_network_name = azurerm_virtual_network.techielassvnet.name
   address_prefixes     = ["10.0.0.0/24"]
+}
+
+resource "azurerm_storage_container" "techielasscontainer" {
+  name                  = "phpApp"
+  storage_account_name  = azurerm_storage_account.techielassrg.name
+  container_access_type = "blob"
+}
+
+resource "azurem_storage_blob" "techielassblobs"{
+  name                   = trim(each.key, "file_uploads/")
+  storage_account_name   = azurerm_storage_account.techielassrg.name
+  storage_container_name = azurerm_storage_container.techielasscontainer.name
+  type                   = "Block"
+  source                 = each.key
 }
