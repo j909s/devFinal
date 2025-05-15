@@ -28,16 +28,7 @@ resource "azurerm_resource_group" "techielassrg" {
   }
 }
 
-resource "azurerm_storage_account" "techssa" {
-  name                     = local.storage_name
-  resource_group_name      = azurerm_resource_group.ttechielassrg.name
-  location                 = azurerm_resource_group.techielassrg.location
-  tags = {
-    environment = var.tag_environment
-    owner       = var.tag_owner
-  }
-}
- 
+
 
 # Create DDOS Protection Plan
 resource "azurerm_network_ddos_protection_plan" "techielassddos" {
@@ -77,10 +68,22 @@ resource "azurerm_subnet" "techielasssubnet" {
   address_prefixes     = ["10.0.0.0/24"]
 }
 
+
+resource "azurerm_storage_account" "techssa" {
+  name                     = local.storage_name
+  resource_group_name      = azurerm_resource_group.ttechielassrg.name
+  location                 = azurerm_resource_group.techielassrg.location
+  tags = {
+    environment = var.tag_environment
+    owner       = var.tag_owner
+  }
+}
+ 
+
 resource "azurerm_storage_container" "techielasscontainer" {
   name                  = local.storage_name
   resource_group_name  = azurerm_resource_group.techielassrg.name
-  storage_account_name  = azurerm_storage_account.techielassrg.name
+  storage_account_name  = azurerm_storage_account.techssa.name
   container_access_type = "blob"
   tags = {
     environment = var.tag_environment
@@ -94,7 +97,7 @@ resource "azurerm_storage_blob" "techossblobs" {
  
   name                   = trim(each.key, "phpApp/")
   resource_group_name  = azurerm_resource_group.techielassrg.name
-  storage_account_name   = azurerm_storage_account.techielassrg.name
+  storage_account_name   = azurerm_storage_account.techssa.name
   storage_container_name = azurerm_storage_container.techielasscontainer.name
   type                   = "Block"
   source                 = each.key
