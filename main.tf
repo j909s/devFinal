@@ -75,7 +75,7 @@ resource "azurerm_storage_account" "techssa" {
   location                 = azurerm_resource_group.techielassrg.location
   account_tier             ="standard"
   account_replication_type = "LRS"
-  public_network_access_enabled = true
+  
   
 }
  
@@ -84,6 +84,7 @@ resource "azurerm_storage_container" "techielasscontainer" {
   name                  = "appcontainer"
   storage_account_name  = azurerm_storage_account.techssa.name
   container_access_type = "blob"
+  public_network_access_enabled = true
   
 }
 
