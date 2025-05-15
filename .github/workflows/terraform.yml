@@ -23,7 +23,7 @@ jobs:
         STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
         CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
 
-        steps:
+      steps:
         # Checkout the repository to the GitHub Actions runner
           - name: Checkout
             uses: actions/checkout@v4.1.1
