@@ -71,7 +71,7 @@ resource "azurerm_subnet" "techielasssubnet" {
 
 resource "azurerm_storage_account" "techssa" {
   name                     = local.storage_name
-  resource_group_name      = azurerm_resource_group.ttechielassrg.name
+  resource_group_name      = azurerm_resource_group.techielassrg.name
   location                 = azurerm_resource_group.techielassrg.location
   tags = {
     environment = var.tag_environment
