@@ -70,7 +70,7 @@ resource "azurerm_subnet" "techielasssubnet" {
 
 
 resource "azurerm_storage_account" "techssa" {
-  name                     = local.storage_name
+  name                     = "phpApp"
   resource_group_name      = azurerm_resource_group.techielassrg.name
   location                 = azurerm_resource_group.techielassrg.location
   account_tier             ="standard"
@@ -80,7 +80,7 @@ resource "azurerm_storage_account" "techssa" {
  
 
 resource "azurerm_storage_container" "techielasscontainer" {
-  name                  = local.storage_name
+  name                  = "appContainer"
   storage_account_name  = azurerm_storage_account.techssa.name
   container_access_type = "blob"
   
