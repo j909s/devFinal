@@ -75,10 +75,7 @@ resource "azurerm_storage_account" "techssa" {
   location                 = azurerm_resource_group.techielassrg.location
   account_tier             ="standard"
   account_replication_type = "LRS"
-  tags = {
-    environment = var.tag_environment
-    owner       = var.tag_owner
-  }
+  
 }
  
 
@@ -87,10 +84,7 @@ resource "azurerm_storage_container" "techielasscontainer" {
   resource_group_name  = azurerm_resource_group.techielassrg.name
   storage_account_name  = azurerm_storage_account.techssa.name
   container_access_type = "blob"
-  tags = {
-    environment = var.tag_environment
-    owner       = var.tag_owner
-  }
+  
 }
 
 
@@ -103,8 +97,5 @@ resource "azurerm_storage_blob" "techossblobs" {
   storage_container_name = azurerm_storage_container.techielasscontainer.name
   type                   = "Block"
   source                 = each.key
-  tags = {
-    environment = var.tag_environment
-    owner       = var.tag_owner
-  }
+  
 }
