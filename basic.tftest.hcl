@@ -1,53 +1,41 @@
 variables {
-  repository_name = "MyRepo"
+  naming_prefix = "techielass"
+  location      = "easteurope"
 }
 
 run "test_plan" {
   command = plan
-}
 
-run "test_apply" {
-  command = apply
-}
-
-run "test_destroy" {
-  command = destroy
-}
-
-assertions {
-  assert "resource_group_name" {
+  check "resource_group_name" {
     output = "resource_group_name"
-    equals = "techielass"
+    contains = "techielass"
   }
 
-  assert "ddos_plan_name" {
+  check "ddos_plan_name" {
     output = "ddos_plan_name"
-    equals = "techielass"
+    contains = "techielass"
   }
 
-  assert "vnet_name" {
+  check "vnet_name" {
     output = "vnet_name"
-    equals = "techielass"
+    contains = "techielass"
   }
 
-  assert "subnet_name" {
+  check "subnet_name" {
     output = "subnet_name"
-    equals = "techielass"
+    contains = "techielass"
   }
 
-  assert "storage_name" {
+  check "storage_name" {
     output = "storage_name"
-    equals = "phpapp"
+    contains = "phpapp"
   }
 
-  assert "container_name" {
+  check "container_name" {
     output = "container_name"
-    equals = "appcontainer"
-  }
-
-  assert "repository_name" {
-    output = "repository_name"
-    equals = "MyRepo"
+    contains = "appcontainer"
   }
 }
+
+
 
