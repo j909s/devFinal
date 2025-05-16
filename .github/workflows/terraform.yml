@@ -71,3 +71,6 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: /public_html/L5SW/Jade/
+    - name: Verify Deployment
+      run: |
+        curl --fail https://yourdomain.com/L5SW/Jade/ || exit 1
