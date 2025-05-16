@@ -45,7 +45,11 @@ jobs:
 # On workflow dispatch build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
       run: terraform apply -auto-approve
+
+
   web-deploy:
+    when:
+      piplineStatus: success
     name: 🎉 Deploy website
     runs-on: ubuntu-latest
     steps:
