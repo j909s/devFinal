@@ -6,8 +6,7 @@ variables {
 }
 
 run "plan" {
-  command = "plan"
-  assertions {
+  command = plan
     resource "azurerm_resource_group" "techielassrg" {
       exists = true
       attributes = {
@@ -53,4 +52,3 @@ run "plan" {
       }
     }
   }
-}

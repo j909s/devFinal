@@ -98,3 +98,8 @@ resource "azurerm_storage_blob" "techossblobs" {
   source                 = each.key
   
 }
+
+# resource "azurerm_codecommit_repository" "test" {
+#   repository_name = format("repo-%s", var.azurerm_resource_group)
+#   description     = "Test repository."
+# }
