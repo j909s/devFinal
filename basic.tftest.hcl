@@ -3,15 +3,15 @@ variables {
 }
 
 run "test_plan" {
-  command = "terraform plan"
+  command = plan
 }
 
 run "test_apply" {
-  command = "terraform apply -auto-approve"
+  command = apply
 }
 
 run "test_destroy" {
-  command = "terraform destroy -auto-approve"
+  command = destroy
 }
 
 assertions {
