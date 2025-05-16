@@ -1,39 +1,43 @@
 variables {
   naming_prefix = "techielass"
-  location      = "easteurope"
+  location      = "eastus"
 }
 
 run "test_plan" {
   command = plan
+}
 
-  check "resource_group_name" {
+run "test_apply" {
+  command = apply
+
+  assertion "resource_group_name" {
     output = "resource_group_name"
-    contains = "techielass"
+    equals = "techielass"
   }
 
-  check "ddos_plan_name" {
+  assertion "ddos_plan_name" {
     output = "ddos_plan_name"
-    contains = "techielass"
+    equals = "techielass"
   }
 
-  check "vnet_name" {
+  assertion "vnet_name" {
     output = "vnet_name"
-    contains = "techielass"
+    equals = "techielass"
   }
 
-  check "subnet_name" {
+  assertion "subnet_name" {
     output = "subnet_name"
-    contains = "techielass"
+    equals = "techielass"
   }
 
-  check "storage_name" {
+  assertion "storage_name" {
     output = "storage_name"
-    contains = "phpapp"
+    equals = "phpapp"
   }
 
-  check "container_name" {
+  assertion "container_name" {
     output = "container_name"
-    contains = "appcontainer"
+    equals = "appcontainer"
   }
 }
 
