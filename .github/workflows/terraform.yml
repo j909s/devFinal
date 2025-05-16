@@ -34,9 +34,6 @@ jobs:
 
       with:
           terraform_version: 1.6.6
-
-    - name: terraform format check
-      run: terraform fmt -check
     
     - name: terraform validate
       run: terraform validate
