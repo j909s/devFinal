@@ -62,9 +62,14 @@ jobs:
     # Checkout the repository
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
+    - name: Check for changes
+      id: changes
+      run: |
+        echo "::set-output name=changed::$(git diff --quiet || echo true)"
 
     # sync files via FTP
     - name: 📂 Sync files via FTP
+      if: steps.changes.outputs.changed == 'true'
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
